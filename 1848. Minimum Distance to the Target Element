@@ -1,0 +1,24 @@
+class Solution {
+public:
+    int getMinDistance(vector<int>& nums, int target, int start) {
+        #include<iostream>
+        #include<cmath>
+        #include<vector>
+
+            using namespace std;
+            int n = nums.size();
+            vector<int> store_indexes;
+            for(int i = 0; i<n; i++) {
+                if(nums[i] == target) {
+                    store_indexes.push_back(i);
+                }
+            }
+            int min = abs(store_indexes[0]-start);
+            for(int j = 0; j<store_indexes.size(); j++) {
+                if(abs(store_indexes[j]-start)<min) {
+                    min = abs(store_indexes[j]-start);
+                }
+            }
+            return min;
+        }
+};
