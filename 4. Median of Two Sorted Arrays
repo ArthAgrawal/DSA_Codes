@@ -1,0 +1,76 @@
+class Solution {
+public:
+    double findMedianSortedArrays(vector<int>& nums1, vector<int>& nums2) {
+        #include<iostream>
+        #include<cmath>
+        #include<vector>
+
+        using namespace std;
+
+            int n1 = nums1.size();
+            int n2 = nums2.size();
+            if(n1 == 0) {
+                if(n2%2==0) {
+                    return (nums2[(n2/2)] + nums2[(n2/2)-1])/2.0;
+                }
+                else {
+                    return nums2[n2/2];
+                }
+            }
+            if(n2 == 0) {
+                if(n1%2==0) {
+                    return (nums1[(n1/2)] + nums1[(n1/2)-1])/2.0;
+                }
+                else {
+                    return nums1[n1/2];
+                }
+            }
+            int pointer1 = 0, pointer2 = 0;
+            bool check1 = false;
+            bool check2 = false;
+            vector<int> merged_vector;
+            while(pointer1<n1 and pointer2<n2) {
+                if(nums1[pointer1]>nums2[pointer2]) {
+                    merged_vector.push_back(nums2[pointer2]);
+                    pointer2++;
+                }
+                else if (nums1[pointer1]<nums2[pointer2]) {
+                    merged_vector.push_back(nums1[pointer1]);
+                    pointer1++;
+                }
+                else{
+                    merged_vector.push_back(nums1[pointer1]);
+                    pointer1++;
+                }
+
+                if(pointer1==n1) {
+                    check1 = true;
+                }
+
+                if(pointer2 == n2) {
+                    check2 = true;
+                }
+            }
+
+            if(check1 == true) {
+                for(int i = pointer2; i<n2; i++) {
+                    merged_vector.push_back(nums2[i]);
+                }
+            }
+            if(check2 == true) {
+                for(int i = pointer1; i<n1; i++) {
+                    merged_vector.push_back(nums1[i]);
+                }
+            }
+
+            int length = merged_vector.size();
+            double median;
+            if(length%2==0) {
+                median = (merged_vector[length/2] + merged_vector[(length/2)-1])/2.0;
+            }
+            else {
+                median = merged_vector[(length/2)];
+            }
+            return median;
+    }
+};
