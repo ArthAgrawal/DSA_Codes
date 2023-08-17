@@ -1,0 +1,44 @@
+// Given a SORTED array/vector of numbers, find out if the target sum exists or not in LINEAR time
+
+
+#include<iostream>
+#include<cmath>
+#include<vector>
+
+using namespace std;
+
+int main() {
+    int n, pointer1, pointer2, sum, target_sum;
+    bool isSum = false;
+    cout<<"Enter the number of elements\n";
+    cin>>n;
+    cout<<"Enter target sum\n";
+    cin>>target_sum;
+    cout<<"Enter elements one by one:\n";
+    vector<int> v(n);
+    for(int i = 0; i<n; i++) {
+        cin>>v[i];
+    }
+    pointer1 = 0, pointer2 = v.size()-1;       // Defining 2 pointers: One from the start of the vector and one from the last
+    while(pointer1<pointer2) {
+        sum = v[pointer1]+v[pointer2];                      
+        //cout<<"Sum right now is "<<sum<<endl;
+        if(sum==target_sum) {
+            isSum = true;
+            break;
+        }
+        else if(sum>target_sum) {
+            pointer2--;                    // Pointer2 will decrement as the required sum is less than current sum
+        }
+        else {
+            pointer1++;                   // Pointer1 will increment as the required sum is more than current sum
+        }
+    }
+
+    if(isSum==true) {
+        cout<<v[pointer1]<<" "<<v[pointer2];
+    }
+    else {
+        cout<<"Target sum cannot be aquired using these values";
+    }
+}
