@@ -1,0 +1,22 @@
+class Solution {
+public:
+    bool check(vector<int> n, int number) {
+        int length = n.size();
+        for(int i = 0; i<length; i++) {
+            if(n[i] == number) {
+                return true;
+            }
+        }
+        return false;
+    }
+    int firstMissingPositive(vector<int>& nums) {
+        int l = nums.size();
+        int counter = 1;
+        while(true) {
+            if(check(nums, counter)==false) {
+                return counter;
+            }
+            counter++;
+        }
+    }
+};
